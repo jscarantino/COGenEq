@@ -9,8 +9,8 @@
  * security boundary is Auth0's server, not this value being hidden.
  */
 window.AUTH_CONFIG = {
-  domain: "YOUR-TENANT.us.auth0.com",
-  clientId: "YOUR-CLIENT-ID",
+  domain: "dev-fwn3ky3d8y6ampro.us.auth0.com",
+  clientId: "lV51lFQyDK0xy5Mgu5cFWsL4BgIZfztb",
 
   // Leave as-is unless you're hosting somewhere other than the page root.
   redirectUri: window.location.origin + window.location.pathname
