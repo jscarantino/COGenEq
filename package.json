@@ -1,0 +1,14 @@
+{
+  "name": "gender-equity-rubric",
+  "version": "1.0.0",
+  "description": "A weighted rubric for assessing gender equity in a venture capital firm and its portfolio. Static site, no runtime dependencies.",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/app.test.js",
+    "start": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gender equity rubric for venture capital firms</title>
+<meta name="description" content="A weighted, evidence-anchored rubric for assessing gender equity across a venture capital firm and its investment portfolio. Runs entirely in your browser.">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:title" content="Gender equity rubric for venture capital firms">
+<meta property="og:description" content="Twenty-one indicators across ten weighted dimensions, covering the management company and the portfolio.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%232242c7'/><g fill='white'><rect x='20' y='60' width='11' height='18' rx='2'/><rect x='36' y='48' width='11' height='30' rx='2'/><rect x='52' y='36' width='11' height='42' rx='2'/><rect x='68' y='22' width='11' height='56' rx='2'/></g></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+
+<div class="bar">
+  <span class="bar-mark">Gender equity rubric</span>
+
+  <label class="visually-hidden" for="pick" hidden>Assessment</label>
+  <select id="pick" title="Switch assessment"></select>
+
+  <button type="button" class="btn" id="btnNew">New assessment</button>
+
+  <span class="bar-spacer"></span>
+
+  <button type="button" class="btn" id="btnTheme" title="Switch between light and dark">Dark</button>
+
+  <span class="menu">
+    <button type="button" class="btn" id="btnMenu" aria-haspopup="true" aria-expanded="false">Manage</button>
+    <span class="menu-panel" id="menu" role="menu">
+      <button type="button" data-act="rename">Rename this assessment</button>
+      <button type="button" data-act="duplicate">Duplicate</button>
+      <hr>
+      <button type="button" data-act="json">Download as JSON</button>
+      <button type="button" data-act="csv">Download as CSV</button>
+      <button type="button" data-act="import">Import a JSON file</button>
+      <button type="button" data-act="print">Print or save as PDF</button>
+      <hr>
+      <button type="button" data-act="clear">Clear all scores</button>
+      <button type="button" class="danger" data-act="delete">Delete this assessment</button>
+    </span>
+  </span>
+</div>
+
+<input type="file" id="file" accept="application/json,.json" hidden>
+
+<header class="hero">
+  <h1>Gender equity rubric for venture capital firms</h1>
+  <p class="lede">Twenty-one indicators across ten weighted dimensions, covering both the management company and the portfolio. Pick the anchor that describes current practice. A rating should be defensible from a document, a dataset or a decision record.</p>
+  <div class="ramp" id="ramp"></div>
+</header>
+
+<main class="shell">
+  <aside class="rail">
+    <div class="rail-total">
+      <div class="num" id="tNum">&mdash;<small>/100</small></div>
+      <div class="band" id="tBand">Not yet scored</div>
+      <div class="prog" id="tProg">Nothing rated yet</div>
+      <div class="rail-track"><i id="tBar"></i></div>
+    </div>
+    <nav class="rail-nav" id="nav" aria-label="Dimensions"></nav>
+  </aside>
+
+  <div>
+    <div id="rubric"></div>
+
+    <section class="summary" id="summary">
+      <h2>Score summary</h2>
+      <p>Each dimension earns its full weight when every indicator sits at 4. Indicators marked not applicable are excluded and that dimension's weight is shared across the rest. A band is a conversation opener, not a rating: two firms at 58 can have entirely different problems, and the table below is where the diagnosis lives.</p>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th class="n">Rated</th>
+              <th class="n">Mean</th>
+              <th class="n">Weight</th>
+              <th class="n">Earned</th>
+            </tr>
+          </thead>
+          <tbody id="sumBody"></tbody>
+        </table>
+      </div>
+      <div class="bars" id="bars"></div>
+    </section>
+
+    <section class="cautions">
+      <h2>Six measurement cautions</h2>
+      <ul id="cautions"></ul>
+    </section>
+  </div>
+</main>
+
+<footer class="colophon">
+  <p>Scores stay in this browser. Nothing is uploaded, and there is no server. Use the export options to move an assessment between machines or keep it under version control.</p>
+  <p>This is a management and diligence tool, not legal advice. Collecting gender data is regulated differently in each jurisdiction, so review your approach against local employment and privacy law before you start.</p>
+</footer>
+
+<script src="assets/rubric.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
