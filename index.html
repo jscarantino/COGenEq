@@ -6,6 +6,7 @@
 <title>Gender equity rubric for venture capital firms</title>
 <meta name="description" content="A weighted, evidence-anchored rubric for assessing gender equity across a venture capital firm and its investment portfolio. Runs entirely in your browser.">
 <meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
 
 <meta property="og:title" content="Gender equity rubric for venture capital firms">
 <meta property="og:description" content="Twenty-one indicators across ten weighted dimensions, covering the management company and the portfolio.">
@@ -19,6 +20,31 @@
 <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
+
+<div class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <span class="bar-mark">Gender equity rubric</span>
+
+    <div id="gateSignedOut" hidden>
+      <h1>Sign in to continue</h1>
+      <p>This assessment is private to people you've invited. Sign in with the email your administrator set up for you.</p>
+      <button type="button" class="btn btn-primary" id="btnLogin">Log in</button>
+    </div>
+
+    <div id="gateUnconfigured" hidden>
+      <h1>Login isn't set up yet</h1>
+      <p>This copy of the rubric has a login gate in the code, but <code>assets/auth-config.js</code> still has placeholder values. Fill in your Auth0 domain and client ID there to turn it on — see the README section "Setting up Auth0."</p>
+    </div>
+
+    <div id="gateError" hidden>
+      <h1>Something went wrong signing in</h1>
+      <p id="gateErrorMsg"></p>
+      <button type="button" class="btn" onclick="window.location.reload()">Try again</button>
+    </div>
+  </div>
+</div>
+
+<div id="appRoot" hidden>
 
 <div class="bar">
   <span class="bar-mark">Gender equity rubric</span>
@@ -102,6 +128,14 @@
   <p>Scores stay in this browser. Nothing is uploaded, and there is no server. Use the export options to move an assessment between machines or keep it under version control.</p>
   <p>This is a management and diligence tool, not legal advice. Collecting gender data is regulated differently in each jurisdiction, so review your approach against local employment and privacy law before you start.</p>
 </footer>
+
+</div><!-- #appRoot -->
+
+<!-- Login gate. Remove this script tag (and assets/auth.js, assets/auth-config.js)
+     to go back to an open, unauthenticated site. -->
+<script src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js"></script>
+<script src="assets/auth-config.js"></script>
+<script src="assets/auth.js"></script>
 
 <script src="assets/rubric.js"></script>
 <script src="assets/app.js"></script>

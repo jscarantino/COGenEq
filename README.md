@@ -55,6 +55,80 @@ are plain `<script>` tags rather than ES modules for exactly that reason.
 
 ---
 
+## Login
+
+The site is behind an Auth0 email/password login screen, and excluded
+from search indexing via `robots.txt` and a `noindex` meta tag.
+
+### What this protects, and what it doesn't
+
+GitHub Pages serves every file in the repository to anyone who requests
+it by URL — that's what static hosting is. The login screen gates what
+the *page renders*; it does not make `assets/rubric.js` or anything else
+in the repository confidential. Someone who opens their browser's network
+tab, or simply requests `your-site.example/assets/rubric.js` directly,
+can read the rubric's content whether or not they've signed in. There is
+no server here to enforce a check on that file.
+
+What login *does* provide: a stranger who finds the bare URL sees a
+sign-in form, not the working app, and can't get past it without an
+account you or Auth0 provisioned. Combined with `robots.txt`, the site
+also won't appear in search results. That matches "I don't want this
+public," which is different from "this data must stay confidential from
+anyone who tries." If you need the second one, you need a real backend —
+see "If you actually need confidentiality" below.
+
+### Setting up Auth0
+
+1. Create a free account at [auth0.com](https://auth0.com).
+2. In the dashboard, go to **Applications → Create Application**, name it
+   anything, and choose **Single Page Web Applications**.
+3. Under that application's **Settings**, set:
+   - **Allowed Callback URLs**: your site's URL (e.g.
+     `https://yourname.github.io/gender-equity-rubric/`)
+   - **Allowed Logout URLs**: the same URL
+   - **Allowed Web Origins**: the same URL, without a trailing slash
+4. Copy the **Domain** and **Client ID** from that same Settings page into
+   `assets/auth-config.js`, replacing the placeholder values.
+5. Commit and push. The gate activates automatically — `auth.js` checks
+   for placeholder text and shows a setup notice instead of a login form
+   until real values are in place.
+
+By default, Auth0 lets anyone sign themselves up with any email address,
+which defeats the point of a private gate. To restrict access to people
+you've chosen:
+
+- Go to **Authentication → Database → your connection → Settings** and
+  turn off **"Disable Sign Ups."**
+- Then add people yourself under **User Management → Users → Create
+  User**, or use **Organizations** if you want to manage a team.
+
+### Removing the login screen
+
+Delete the three lines near the bottom of `index.html` that load
+`auth0-spa-js`, `auth-config.js`, and `auth.js`, and remove the `#gate`
+markup near the top of `<body>`. `app.js` falls back to booting itself
+immediately when `window.__RUBRIC_GATED__` is never set, so nothing else
+needs to change.
+
+### If you actually need confidentiality
+
+A static site fundamentally cannot keep its own files secret from a
+determined visitor. If the assessments themselves are sensitive enough
+that this matters, options include:
+
+- A small serverless function (Cloudflare Worker, Netlify Function, AWS
+  Lambda) in front of the static files, checking a session before serving
+  them — real access control, at the cost of no longer being "just a
+  GitHub Pages site."
+- Keeping the repository itself private and using GitHub's built-in
+  collaborator access instead of a public deployment.
+- Storing assessment data server-side behind real authentication, rather
+  than in browser `localStorage`, if the *scores* — not just the blank
+  rubric — are what needs protecting.
+
+---
+
 ## Customising the rubric
 
 `assets/rubric.js` is the whole model. Everything in the interface —

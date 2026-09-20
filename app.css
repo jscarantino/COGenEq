@@ -483,6 +483,69 @@ tr.total td { font-weight: 700; background: var(--signal-wash); color: var(--sig
 .colophon { max-width: 1180px; margin: 0 auto; padding: 0 20px 64px; color: var(--ink-3); font-size: 13px; }
 .colophon p { max-width: 74ch; }
 
+/* ----------------------------------------------------------------- gate */
+
+.gate {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--paper);
+}
+
+.gate-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 28px 26px 26px;
+  text-align: left;
+}
+
+.gate-card .bar-mark {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.gate-card h1 {
+  font-size: 21px;
+  letter-spacing: -.018em;
+  margin-bottom: 8px;
+}
+
+.gate-card p {
+  font-size: 14.5px;
+  color: var(--ink-2);
+  max-width: none;
+}
+
+.gate-card code {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 13px;
+}
+
+.gate-card .btn {
+  margin-top: 14px;
+}
+
+.btn-primary {
+  background: var(--signal) !important;
+  border-color: var(--signal) !important;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 9px 16px !important;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
 /* ------------------------------------------------------------ responsive */
 
 @media (max-width: 900px) {

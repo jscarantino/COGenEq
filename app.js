@@ -554,11 +554,23 @@
     });
   }
 
-  initTheme();
-  checkWeights();
-  state = load();
-  renderStatic();
-  paintPicker();
-  wire();
-  paint();
+  function boot() {
+    initTheme();
+    checkWeights();
+    state = load();
+    renderStatic();
+    paintPicker();
+    wire();
+    paint();
+  }
+
+  // Normally this app boots itself immediately. When a login gate is
+  // present (assets/auth.js), that script defers the call to boot()
+  // until sign-in succeeds, and sets window.__RUBRIC_GATED__ beforehand
+  // so this file knows not to double-boot.
+  if (!window.__RUBRIC_GATED__) {
+    boot();
+  } else {
+    window.__bootRubricApp = boot;
+  }
 })();
