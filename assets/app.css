@@ -494,6 +494,26 @@ tr.total td { font-weight: 700; background: var(--signal-wash); color: var(--sig
   background: var(--paper);
 }
 
+/* An author rule setting `display` beats the browser's own default of
+   [hidden] { display: none } at equal specificity, in every real
+   browser -- so without this line, the gate stays visibly on screen
+   forever, no matter what auth.js sets the `hidden` attribute to.
+   (Note for maintainers: jsdom's CSS engine does not reproduce this
+   specific cascade tie-break, so the automated test suite cannot
+   verify this rule the way it verifies most other behavior here --
+   this one is enforced by the CSS Cascade spec, not by a test.) */
+.gate[hidden] {
+  display: none;
+}
+
+/* An author rule setting `display` always beats the browser's own
+   [hidden] { display: none }, even at equal specificity — so without
+   this line, the gate would stay visibly on screen forever, no matter
+   what auth.js sets the `hidden` attribute to. */
+
+  display: none;
+}
+
 .gate-card {
   width: 100%;
   max-width: 380px;
