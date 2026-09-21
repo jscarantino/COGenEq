@@ -169,7 +169,7 @@
     }).join("");
 
     $("nav").innerHTML = PARTS.map(function (p) {
-      return '<div class="rail-group">' + esc(p.title) + " &middot; " + p.weight + " pts</div>" +
+      return '<div class="rail-group"><span>' + esc(p.title) + '</span><span class="wt">' + p.weight + " pts</span></div>" +
         p.dims.map(function (d) {
           return '<a href="#dim-' + d.id + '" data-dim="' + d.id + '">' +
             '<span class="id">' + d.id + '</span>' +
